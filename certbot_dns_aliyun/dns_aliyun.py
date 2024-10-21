@@ -30,7 +30,7 @@ class Authenticator(dns_common.DNSAuthenticator):
     def add_parser_arguments(cls, add):  # pylint: disable=arguments-differ
         super(Authenticator, cls).add_parser_arguments(add, default_propagation_seconds=30)
         add('credentials', help='Aliyun DNS credentials INI file.')
-        add('ingore-ssl', help='Whether to ingore SSL for http requests.', default=False)
+        add('ignore-ssl', help='Whether to ignore SSL for http requests.', default=False)
 
     def more_info(self):  # pylint: disable=missing-docstring,no-self-use
         return 'This plugin configures a DNS TXT record to respond to a dns-01 challenge using ' + \

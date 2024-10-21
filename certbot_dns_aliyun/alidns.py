@@ -36,11 +36,11 @@ class AliDNSClient():
     _ttl = 600
     _ignore_ssl = False
 
-    def __init__(self, access_key, access_key_secret, ttl = 600, igore_ssl = False):
+    def __init__(self, access_key, access_key_secret, ttl = 600, ignore_ssl = False):
         self._access_key = access_key
         self._access_key_secret = access_key_secret
         self._ttl = ttl
-        self._ignore_ssl = igore_ssl
+        self._ignore_ssl = ignore_ssl
 
     def _find_domain_id(self, domain):
         domain_name_guesses = dns_common.base_domain_name_guesses(domain)
