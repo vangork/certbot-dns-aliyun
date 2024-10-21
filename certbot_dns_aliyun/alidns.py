@@ -34,11 +34,13 @@ class AliDNSClient():
     _access_key = ''
     _access_key_secret = ''
     _ttl = 600
+    _ignore_ssl = False
 
-    def __init__(self, access_key, access_key_secret, ttl = 600):
+    def __init__(self, access_key, access_key_secret, ttl = 600, igore_ssl = False):
         self._access_key = access_key
         self._access_key_secret = access_key_secret
         self._ttl = ttl
+        self._ignore_ssl = igore_ssl
 
     def _find_domain_id(self, domain):
         domain_name_guesses = dns_common.base_domain_name_guesses(domain)
@@ -114,7 +116,7 @@ class AliDNSClient():
         h = hmac.new((self._access_key_secret + '&').encode(), str_to_sign.encode(), sha1)
         params['Signature'] = base64.b64encode(h.digest()).decode().rstrip('\n')
 
-        r = requests.get(API_ENDPOINT, params=params)
+        r = requests.get(API_ENDPOINT, params=params, verify=self._ignore_ssl)
         r = r.json()
 
         if 'Code' in r:
