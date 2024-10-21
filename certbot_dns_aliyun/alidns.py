@@ -116,7 +116,7 @@ class AliDNSClient():
         h = hmac.new((self._access_key_secret + '&').encode(), str_to_sign.encode(), sha1)
         params['Signature'] = base64.b64encode(h.digest()).decode().rstrip('\n')
 
-        r = requests.get(API_ENDPOINT, params=params, verify=self._ignore_ssl)
+        r = requests.get(API_ENDPOINT, params=params, verify=(not self._ignore_ssl))
         r = r.json()
 
         if 'Code' in r:
